@@ -9,8 +9,27 @@ This is a project template for [Svelte](https://svelte.dev) apps. It lives at ht
 # Notes
 
 - Can't get animations on Materialify Cards due to this: https://stackoverflow.com/questions/66056367/svelte-with-snowpack-gives-not-implemented-animation-when-trying-to-import-tr
-- 
+- `flip` animation requires reordering of current JSON object, **not** recreating a new sorted object. (Subtle bug?)
+- In general, a too low abstraction level for my preferred workflow. Full control, but requires a lot of fiddling around.
 
 ## Improvements
 
 - Better griding, for all screen sizes
+
+# TODO
+
+- Add CTR ranker
+- Add combined ranker
+- Add ranker scores to the cards
+- Sliders
+  - Add CTR ranker
+  - Add weight per ranker
+- Chart
+  - Add axis labels
+  - Remove legend
+- Cleanup
+  - Include all packages in packages.json
+- Write a brief README
+  - Explain dashboard motivation
+  - Explain rankers in brief
+  - How to run locally

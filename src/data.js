@@ -1,4 +1,3 @@
-
 let images = [
   {
     name: 'Getting married',
@@ -30,7 +29,7 @@ let images = [
     newsValue: 30
   },
   {
-    name: 'Tom gained 20 pounds',
+    name: 'Tom earned 20 quid',
     newsValue: 35
   },
   {
@@ -45,16 +44,35 @@ let images = [
     name: 'Earthquake in two days',
     newsValue: 20
   },
+  {
+    name: 'The stocks to buy now',
+    newsValue: 40
+  },
 ];
+
+const highClicks = 500;
+const highImps = 5000;
+const lowClicks = highClicks/20;
+const lowImps = highImps/30;
+
+const generateEvents = e => Math.round(Math.random() * e)
+
+function createClicks(i) {
+  return (i%3 === 0 ? generateEvents(lowClicks) : generateEvents(highClicks))
+}
+
+function createImps(i) {
+  return (i%3 === 0 ? lowClicks + generateEvents(lowImps) : highClicks*2 + generateEvents(highImps))
+}
 
 let data = images.map(
   (obj, i) => ({
     ...obj,
     id: i,
-    publishedHour: i + 8,
+    publishedHour: i + 7,
     img: "//picsum.photos/80?random=" + i,
-    clicks: Math.round(Math.random() * 1000),
-    impressions: Math.round(Math.random() * 50000)
+    clicks: createClicks(i),
+    impressions: createImps(i)
   })
 )
 
