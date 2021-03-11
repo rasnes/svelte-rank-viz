@@ -12,32 +12,28 @@
 	import { chart } from 'svelte-apexcharts';
 	import { jStat } from 'jstat';
 
-
-	let startVal = 80;
+	const images = data.map(obj => obj.img)
+	const percentiles = jStat.seq(0, 1, data.length + 1).reverse()
+	let startVal = 75;
 	let halfLife = 24;
 	let ctrProb = 0.1;
-	const currTime = 18;  
+	let currHour = 18;  
 	let tdWeight = 1;
 	let ctrWeight = 1;
 	let list = data;
-	let scores;
-	let pH = data[1];
 	let plotData;
-	const images = data.map(obj => obj.img)
 	let options;
-	let rankedIds;
+	let scores;
 	let ctrRank;
 	let ctrRankedIds;
 	let ctrRankedScores;
 	let ctrPercentile;
 	let listRankedIds;
 
-	let percentiles = jStat.seq(0, 1, data.length + 1).reverse()
-
 	function timeDecay(nv, startVal, halfLife, pHour) {
 		const nvScaled = nv/100 * (100 - startVal) + startVal
 		const halfLifeScaled = nv/100 * halfLife
-		const age = currTime - pHour
+		const age = currHour - pHour
 		const res =  nvScaled * Math.pow(2,  -age/halfLifeScaled)
 		return res/100
 	}
@@ -67,7 +63,7 @@
 
 		scores = data.map(o => rankerScore(tdWeight, ctrWeight, startVal, halfLife, o.newsValue, o.publishedHour, ctrPercentile[o.id]))
 
-		plotData = data.map((o, i) => ({name: o.name, data: [[currTime - o.publishedHour, scores[i]]]}))
+		plotData = data.map((o, i) => ({name: o.name, data: [[currHour - o.publishedHour, scores[i]]]}))
 
 		options = {
 			series: plotData,
@@ -89,7 +85,7 @@
 			xaxis: {
 				tickAmount: 2,
 				min: 0,
-				max: 12,
+				max: 18,
 				title: {
 					text: "Hours since published"
 				}
@@ -119,7 +115,6 @@
 			}
 		}
 	}
-
 
 </script>
 
@@ -161,6 +156,15 @@
 							<input class="slider" type=range bind:value={ctrProb} min=0.01 max=0.99 step=0.01>
 						</label>
 					</p>
+					<hr>
+					<br>
+					<p>
+						<b>Clockhour of day:</b>
+						<label>
+							<input type=number bind:value={currHour} min=6 max=23 step=1>
+							<input class="slider" type=range bind:value={currHour} min=6 max=23 step=1>
+						</label>
+					</p>
 				</div>
 			</div>
 		</Col>
@@ -182,7 +186,7 @@
 										<div style="margin-left: 10px;">
 											<b style="font-size:14px">{listRankedIds.indexOf(article.id) + 1}: {article.name}</b> <br>
 											<p style="font-size:12px">
-												NV: {article.newsValue}, Published: {getPubTime(article.publishedHour)} <br>
+												Published: {getPubTime(article.publishedHour)}, NV: {article.newsValue}<br>
 												Clicks: {article.clicks}, Imps: {article.impressions}, CTR: {Math.round(ctrScore(ctrProb, article.clicks, article.impressions) * 100) / 100} <br>
 												TD: {Math.round(timeDecay(article.newsValue, startVal, halfLife, article.publishedHour) * 100) / 100},
 												CS: {Math.round(ctrPercentile[article.id] * 100) / 100}, 

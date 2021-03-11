@@ -18,15 +18,7 @@ This is a project template for [Svelte](https://svelte.dev) apps. It lives at ht
 
 # TODO
 
-- Add CTR ranker
-- Add combined ranker
-- Add ranker scores to the cards
-- Sliders
-  - Add CTR ranker
-  - Add weight per ranker
-- Chart
-  - Add axis labels
-  - Remove legend
+- Export code to `docs` rather than public
 - Cleanup
   - Include all packages in packages.json
 - Write a brief README
