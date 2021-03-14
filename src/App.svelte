@@ -12,8 +12,8 @@
 	import { chart } from 'svelte-apexcharts';
 	import { jStat } from 'jstat';
 
-	const images = data.map(obj => obj.img)
-	const percentiles = jStat.seq(0, 1, data.length + 1).reverse()
+	const images = data.map(obj => obj.img);
+	const percentiles = jStat.seq(0, 1, data.length + 1).reverse();
 	let startVal = 75;
 	let halfLife = 24;
 	let ctrProb = 0.1;
@@ -53,17 +53,17 @@
 
 	$: {
 
-		ctrRank = _.sortBy(data, [o => -ctrScore(ctrProb, o.clicks, o.impressions)])
-	  ctrRankedIds = ctrRank.map(o => o.id)
-		ctrRankedScores = ctrRank.map((o, i) => percentiles[i])
-		ctrPercentile = _.zipObject(ctrRankedIds, ctrRankedScores)
+		ctrRank = _.sortBy(data, [o => -ctrScore(ctrProb, o.clicks, o.impressions)]);
+	  ctrRankedIds = ctrRank.map(o => o.id);
+		ctrRankedScores = ctrRank.map((o, i) => percentiles[i]);
+		ctrPercentile = _.zipObject(ctrRankedIds, ctrRankedScores);
 
-		list = _.sortBy(data, [o => -rankerScore(tdWeight, ctrWeight, startVal, halfLife, o.newsValue, o.publishedHour, ctrPercentile[o.id])])
-		listRankedIds = list.map(o => o.id)
+		list = _.sortBy(data, [o => -rankerScore(tdWeight, ctrWeight, startVal, halfLife, o.newsValue, o.publishedHour, ctrPercentile[o.id])]);
+		listRankedIds = list.map(o => o.id);
 
-		scores = data.map(o => rankerScore(tdWeight, ctrWeight, startVal, halfLife, o.newsValue, o.publishedHour, ctrPercentile[o.id]))
+		scores = data.map(o => rankerScore(tdWeight, ctrWeight, startVal, halfLife, o.newsValue, o.publishedHour, ctrPercentile[o.id]));
 
-		plotData = data.map((o, i) => ({name: o.name, data: [[currHour - o.publishedHour, scores[i]]]}))
+		plotData = data.map((o, i) => ({name: o.name, data: [[currHour - o.publishedHour, scores[i]]]}));
 
 		options = {
 			series: plotData,
@@ -73,13 +73,6 @@
 				width: '200%',
 				animations: {
 					enabled: false
-				},
-				zoom: {
-					enabled: false,
-					axis: "xy"
-				},
-				toolbar: {
-					show: false
 				}
 			},
 			xaxis: {
@@ -95,7 +88,7 @@
 				min: 0,
 				max: 2,
 				title: {
-					text: "Combined ranker scores (Score)"
+					text: "Combined ranker score (Score)"
 				}
 			},
 			legend: {
@@ -168,6 +161,7 @@
 				</div>
 			</div>
 		</Col>
+
 		<Col>
 			<div class="d-flex mt-2 mb-2">
 				<div class="rounded elevation-2 pa-6" style="flex-grow:1;">
@@ -175,6 +169,7 @@
 				</div>
 			</div>
 		</Col>
+		
 		<Col>
 			<div class="d-flex justify-end mt-2 mb-2">
 				<div class="rounded elevation-2 pa-3" style="flex-grow:1;max-width:330px;overflow:auto;max-height:800px;">
