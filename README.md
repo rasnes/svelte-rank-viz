@@ -33,8 +33,8 @@ The app is built on top of the https://github.com/sveltejs/template. Svelte was 
 
 I usually make dashboard apps in Shiny (`R`) or Dash (`Python`), and they work well in most cases. In particular, I'd say there are two things in this Svelte app that would be hard to acheive (possible?) in either of those frameworks:
 
-1. The lightning fast reactivity. Since Svelte compiles to optimised vanilla JavaScript all running in the front-end, we get instant reactivity when "turning the knobs".
-2. Animations in the ranked article list. Animations make it clearer to the user how exactly "turning the knobs" affect the _rank_ of aricles (not only the ranker _scores_). This could easily be acheived with Svelte's built-in `flip` animation.
+1. The "lightning" fast reactivity. Since Svelte compiles to optimised vanilla JavaScript all running in the front-end, we get instant reactivity when "turning the knobs".
+2. Animations in the ranked article list. Animations make it clearer to the user how exactly "turning the knobs" affect the _rank_ of aricles (not only the ranker _scores_). This was easily be acheived with Svelte's built-in `flip` animation.
 
 ## Ranking logic in brief
 
