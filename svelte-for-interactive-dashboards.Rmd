@@ -1,0 +1,38 @@
+---
+title: "Svelte for interactive dashboards"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Rasmus Nes 
+    url: {}
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web. 
+
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+
+```{r layout="l-body-outset"}
+htmltools::includeHTML("./docs/distill-embed-app.html")
+```
+
+## Shiny app
+
+```{r, layout="l-screen-inset", eval=T}
+knitr::include_app("https://vtr-ranker-qbeta-3jyqrh2z2q-ez.a.run.app/", 
+                    height = 800)
+```
+
+
+
+
+
+
+
+
+
