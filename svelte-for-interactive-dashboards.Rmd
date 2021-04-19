@@ -17,7 +17,7 @@ Distill is a publication format for scientific and technical writing, native to 
 
 Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
 
-```{r layout="l-body-outset"}
+```{r layout="l-screen"}
 htmltools::includeHTML("./docs/distill-embed-app.html")
 ```
 
